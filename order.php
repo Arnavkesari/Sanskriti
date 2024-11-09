@@ -74,7 +74,7 @@
                       echo "<div class='item-info'>";
                       echo "<h3>{$productName}</h3>";
                       echo "<p>Quantity: {$productQuantity}</p>";
-                      echo "<p>Price: $" . number_format($productPrice, 2) "</p>";
+                      echo "<p>Price: $" . number_format($productPrice, 2)."</p>";
                       echo "</div>";
                       echo "</div>";
                   }
