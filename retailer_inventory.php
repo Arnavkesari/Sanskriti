@@ -2,19 +2,19 @@
 session_start();
 include 'db_connection.php'; // Include database connection file
 
-// Check if retailer is logged in
-if (!isset($_SESSION['RID'])) {
-    die("Access denied. Please log in as a retailer.");
+// Check if the user is logged in as a retailer
+if (!isset($_SESSION['ID']) || $_SESSION['user_type'] != 'Retailer') {
+    header('Location: login.html');
+    exit();
 }
 
-$retailerID = $_SESSION['RID'];
-
+$retailerID = $_SESSION['ID'];
 // Fetch products for the logged-in retailer
 $pendingProducts = [];
 $listedProducts = [];
 
 // Fetch pending products
-$result = mysqli_query($conn, "SELECT * FROM products WHERE RID = '$retailerID' AND Status = 'Pending'");
+$result = mysqli_query($conn, "SELECT * FROM Products WHERE RID = '$retailerID' AND Status = 'Pending'");
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         $pendingProducts[] = $row;
@@ -22,7 +22,7 @@ if ($result) {
 }
 
 // Fetch approved products
-$result = mysqli_query($conn, "SELECT * FROM products WHERE RID = '$retailerID' AND Status = 'Approved'");
+$result = mysqli_query($conn, "SELECT * FROM Products WHERE RID = '$retailerID' AND Status = 'Approved'");
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         $listedProducts[] = $row;
@@ -39,7 +39,7 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retailer Inventory</title>
-    <link rel="stylesheet" href="styles1.css">
+    <link rel="stylesheet" href="retailer_inventory.css">
 </head>
 <body>
     <header>
@@ -48,8 +48,11 @@ mysqli_close($conn);
 
     <div class="heading-container">
         <div class="heading">Inventory</div>
-        <button class="add-new-button">Add New Product</button>
+        <a href="addProduct.html">
+            <button class="add-new-button">Add New Product</button>
+        </a>
     </div>
+
 
     <!-- Pending Products -->
     <section class="products">
@@ -83,7 +86,7 @@ mysqli_close($conn);
                     <p class="price">$<?= htmlspecialchars($product['Price']) ?></p>
                     <p class="stock-quantity">In Stock: <span><?= htmlspecialchars($product['Quantity']) ?></span></p>
                     <div class="action-buttons">
-                        <button class="delete-product" onclick="openModal(<?= $product['ID'] ?>)">Delete</button>
+                    <button class="delete-product" onclick="openModal('<?= htmlspecialchars($product['ID'], ENT_QUOTES) ?>')">Delete</button>
                         <button class="update-product">Update</button>
                     </div>
                 </div>
@@ -104,6 +107,7 @@ mysqli_close($conn);
         </div>
     </div>
 
+
     <!-- Notification for delete success -->
     <div class="notification" id="deleteNotification">Product deleted successfully!</div>
 
@@ -112,6 +116,7 @@ mysqli_close($conn);
 
         // Function to open the modal and set the product ID to delete
         function openModal(productID) {
+            console.log("Opening modal for product ID:", productID);
             productIDToDelete = productID;
             document.getElementById("deleteModal").style.display = "flex";
         }
@@ -121,6 +126,7 @@ mysqli_close($conn);
             document.getElementById("deleteModal").style.display = "none";
             productIDToDelete = null;
         }
+
 
         // Function to show notification
         function showNotification() {
@@ -146,8 +152,11 @@ mysqli_close($conn);
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
+                        // Remove the product card from the DOM
                         document.querySelector(`.product-card[data-product-id='${productIDToDelete}']`).remove();
                         showNotification();
+                    } else {
+                        console.error("Error:", data.error);
                     }
                     closeModal();
                 })
