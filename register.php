@@ -1,23 +1,12 @@
 <?php
-// Database configuration
-$host = "localhost";  // Update as needed
-$dbname = "sanskriti";  // Update as needed
-$username = "your_db_username";  // Update as needed
-$password = "your_db_password";  // Update as needed
-
-// Create connection
-$conn = new mysqli($host, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+session_start();
+include('db_connection.php');
 
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data
     $id = $_POST['UserID'];
-    $pass = password_hash($_POST['pass'], PASSWORD_BCRYPT);  // Hash the password
+    $pass = $_POST['pass'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $name = $_POST['name'];

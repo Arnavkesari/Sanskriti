@@ -1,45 +1,28 @@
 <?php
-// Database configuration
-$servername = "localhost"; // Your server (e.g., localhost)
-$username = "your_db_username"; // Database username
-$password = "your_db_password"; // Database password
-$dbname = "sanskriti"; // Database name
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+session_start();
+include('db_connection.php');
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve user inputs
-    $userID = $_POST['user-id'];
+    $userID = $_POST['ID'];
     $userPassword = $_POST['password'];
 
-    // Prepare SQL statement to check for user
-    $sql = "SELECT * FROM Users WHERE ID = ? AND Password = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $userID, $userPassword);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $sql = "SELECT * FROM Users WHERE ID = '$userID' AND Password = '$userPassword'";
+    $res=mysqli_query($conn,$sql);
 
-    if ($result->num_rows > 0) {
-        // Login successful
-        echo "Login successful!";
-        // Redirect to dashboard or home page
-        // header("Location: dashboard.php");
-        // exit();
-    } else {
-        // Login failed
-        echo "Invalid User ID or Password.";
+    if($result=mysqli_fetch_assoc($res)){
+        $_SESSION['ID']=$result['ID'];
+        header('location:retailer_dashboard.html');
     }
-
-    // Close statement and connection
-    $stmt->close();
-}
+    else{ 
+        $sql = "SELECT * FROM Admin WHERE AdminID = '$userID' AND Password = '$userPassword'";
+        $res=mysqli_query($conn,$sql);
+        if($result=mysqli_fetch_assoc($res)){
+            $_SESSION['ID']=$result['ID'];
+            header('location:retailer_dashboard.html');
+        }
+        else
+        header('location:register.html'); 
+    }
 
 $conn->close();
 ?>

@@ -17,8 +17,8 @@
       <?php
       // Database connection
       $servername = "localhost"; // or your server name
-      $username = "your_username"; // replace with your database username
-      $password = "your_password"; // replace with your database password
+      $username = "root"; // replace with your database username
+      $password = ""; // replace with your database password
       $dbname = "sanskriti"; // replace with your database name
 
       // Create connection
