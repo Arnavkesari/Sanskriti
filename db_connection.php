@@ -3,7 +3,7 @@
 $host = "localhost";      // Database host
 $username = "root";       // Database username
 $password = "";           // Database password
-$dbname = "your_database"; // Database name
+$dbname = "sanskriti"; // Database name
 
 // Establishing database connection
 $conn = mysqli_connect($host, $username, $password, $dbname);
