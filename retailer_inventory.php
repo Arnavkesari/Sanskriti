@@ -42,9 +42,7 @@ mysqli_close($conn);
     <link rel="stylesheet" href="retailer_inventory.css">
 </head>
 <body>
-    <header>
-        <h1>Inventory Management</h1>
-    </header>
+    <?php include 'header.html'; ?>
 
     <div class="heading-container">
         <div class="heading">Inventory</div>
@@ -58,45 +56,53 @@ mysqli_close($conn);
     <section class="products">
         <h2>Pending Products</h2>
         <div class="product-grid">
-            <?php foreach ($pendingProducts as $product): ?>
-                <div class="product-card" data-product-id="<?= $product['ID'] ?>">
-                    <img src="<?= htmlspecialchars($product['Image']) ?>" alt="Product Image">
-                    <h3><?= htmlspecialchars($product['Name']) ?></h3>
-                    <p class="description"><?= htmlspecialchars($product['Description']) ?></p>
-                    <p class="price">$<?= htmlspecialchars($product['Price']) ?></p>
-                    <p class="stock-quantity">In Stock: <span><?= htmlspecialchars($product['Quantity']) ?></span></p>
-                    <div class="action-buttons">
-                        <button class="delete-product" onclick="openModal(<?= $product['ID'] ?>)">Delete</button>
-                        <button class="update-product">Update</button>
+            <?php if (empty($pendingProducts)): ?>
+                <p>No pending products</p>
+            <?php else: ?>
+                <?php foreach ($pendingProducts as $product): ?>
+                    <div class="product-card" data-product-id="<?= $product['ID'] ?>">
+                        <img src="<?= htmlspecialchars($product['Image']) ?>" alt="Product Image">
+                        <h3><?= htmlspecialchars($product['Name']) ?></h3>
+                        <p class="description"><?= htmlspecialchars($product['Description']) ?></p>
+                        <p class="price">$<?= htmlspecialchars($product['Price']) ?></p>
+                        <p class="stock-quantity">In Stock: <span><?= htmlspecialchars($product['Quantity']) ?></span></p>
+                        <div class="action-buttons">
+                            <button class="delete-product" onclick="openModal('<?= htmlspecialchars($product['ID'], ENT_QUOTES) ?>')">Delete</button>
+                            <button class="update-product" onclick="window.location.href='updateProduct.php?productID=<?= $product['ID'] ?>'">Update</button>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </section>
+
 
     <!-- Listed Products -->
     <section class="products">
         <h2>Listed Products</h2>
         <div class="product-grid">
-            <?php foreach ($listedProducts as $product): ?>
-                <div class="product-card" data-product-id="<?= $product['ID'] ?>">
-                    <img src="<?= htmlspecialchars($product['Image']) ?>" alt="Product Image">
-                    <h3><?= htmlspecialchars($product['Name']) ?></h3>
-                    <p class="description"><?= htmlspecialchars($product['Description']) ?></p>
-                    <p class="price">$<?= htmlspecialchars($product['Price']) ?></p>
-                    <p class="stock-quantity">In Stock: <span><?= htmlspecialchars($product['Quantity']) ?></span></p>
-                    <div class="action-buttons">
-                    <button class="delete-product" onclick="openModal('<?= htmlspecialchars($product['ID'], ENT_QUOTES) ?>')">Delete</button>
-                        <button class="update-product">Update</button>
+            <?php if (empty($listedProducts)): ?>
+                <p>No listed products</p>
+            <?php else: ?>
+                <?php foreach ($listedProducts as $product): ?>
+                    <div class="product-card" data-product-id="<?= $product['ID'] ?>">
+                        <img src="<?= htmlspecialchars($product['Image']) ?>" alt="Product Image">
+                        <h3><?= htmlspecialchars($product['Name']) ?></h3>
+                        <p class="description"><?= htmlspecialchars($product['Description']) ?></p>
+                        <p class="price">$<?= htmlspecialchars($product['Price']) ?></p>
+                        <p class="stock-quantity">In Stock: <span><?= htmlspecialchars($product['Quantity']) ?></span></p>
+                        <div class="action-buttons">
+                            <button class="delete-product" onclick="openModal('<?= htmlspecialchars($product['ID'], ENT_QUOTES) ?>')">Delete</button>
+                            <button class="update-product" onclick="window.location.href='updateProduct.php?productID=<?= $product['ID'] ?>'">Update</button>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </section>
 
-    <footer>
-        <p>Footer</p>
-    </footer>
+
+    <?php include 'footer.html'; ?>
 
     <!-- Modal for delete confirmation -->
     <div class="modal" id="deleteModal">

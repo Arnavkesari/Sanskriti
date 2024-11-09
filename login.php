@@ -36,7 +36,7 @@ if ($result = $res->fetch_assoc()) {
     $_SESSION['user_name'] = $result['AdminName']; // Assuming there’s an 'AdminName' field in Admin table
 
     // Redirect to admin dashboard
-    header('Location: admin_dashboard.php'); // Consider using a different dashboard for admins
+    header('Location: Admin_dashboard.php'); // Consider using a different dashboard for admins
     exit();
 }
 
