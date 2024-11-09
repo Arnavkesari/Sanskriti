@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="styles1.css">
 </head>
 <body>
+    <?php
+    session_start();
+    include 'db_connection.php'; // Include the database connection file
+    ?>
+
     <header>
         <h1>Header</h1>
     </header>
@@ -60,20 +65,6 @@
             <!-- Regions Container -->
             <div class="regions-container" id="regionsContainer">
                 <?php
-                    // Database connection
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "sanskriti";
-
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-
-                    // Check connection
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-
                     // Query to get regions (states)
                     $sql = "SELECT Name FROM States";
                     $result = $conn->query($sql);
@@ -86,9 +77,6 @@
                     } else {
                         echo "No regions available.";
                     }
-
-                    // Close connection
-                    $conn->close();
                 ?>
             </div>
             <!-- Right Scroll Button -->
@@ -100,13 +88,7 @@
         <h2>Products</h2>
         <div class="product-grid">
             <?php
-                // Reuse the connection to fetch products (or reconnect if needed)
-                $conn = new mysqli($servername, $username, $password, $dbname);
-                
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
-
+                // Fetch approved products
                 $sql = "SELECT ID, Name, Description, Image, Price, Quantity FROM Products WHERE Status = 'Approved'";
                 $result = $conn->query($sql);
 
@@ -128,9 +110,6 @@
                 } else {
                     echo "No products available.";
                 }
-
-                // Close connection
-                $conn->close();
             ?>
         </div>
     </section>
