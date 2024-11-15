@@ -1,0 +1,58 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header{
+    background-color: #f8f9fa;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.product-item {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.product-img {
+    width: 60px;
+    height: 60px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+}
+
+.description {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.quantity-control button {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.quantity {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.price, .total-amount, .total-label {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.total-label {
+    margin-right: 10px;
+}
+
+.form-group input[type="text"] {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+.btn-save {
+    width: 100%;
+    margin-top: 10px;
+}

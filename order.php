@@ -1,39 +1,39 @@
+<?php
+    session_start();
+    include 'db_connection.php'; // Include the database connection file
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+    include 'header.html';
+    if (!isset($_SESSION['ID'])) {
+        header('Location: login.html');
+        exit();
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Orders</title>
-  <link rel="stylesheet" href="order_css.css">
+  <link rel="stylesheet" href="orders.css">
 </head>
 <body>
-  <header>
-    <h1>My Orders</h1>
-    <p>Here are all the orders you've placed with us.</p>
-  </header>
   
   <main>
+  
+
     <section class="order-list">
+    <h1>My Orders</h1>
       <?php
-      // Database connection
-      $servername = "localhost"; // or your server name
-      $username = "root"; // replace with your database username
-      $password = ""; // replace with your database password
-      $dbname = "sanskriti"; // replace with your database name
-
-      // Create connection
-      $conn = new mysqli($servername, $username, $password, $dbname);
-
-      // Check connection
-      if ($conn->connect_error) {
-          die("Connection failed: " . $conn->connect_error);
-      }
-
-      // Assuming a user ID is provided for querying their orders
-      $userID = 'some_user_id'; // replace with the actual user ID (could be obtained from session)
+     
+      $userID = $_SESSION['ID'];
+      
 
       // Query to get orders for the specific user
-      $orderQuery = "SELECT * FROM Order WHERE CustID = '$userID'";
+      $orderQuery = "SELECT * FROM `order` WHERE CustID = '$userID'";
       $orderResult = $conn->query($orderQuery);
 
       if ($orderResult->num_rows > 0) {
@@ -44,7 +44,7 @@
               $orderStatus = "Shipped"; // Assuming you have a field for status; replace accordingly
 
               echo "<div class='order-card'>";
-              echo "<h2>Order #{$orderID}</h2>";
+              echo "<h2>Order {$orderID}</h2>";
               echo "<p><strong>Date:</strong> " . date("F j, Y", strtotime($orderDate)) . "</p>";
               echo "<p><strong>Status:</strong> {$orderStatus}</p>";
               echo "<div class='order-items'>";
@@ -71,10 +71,10 @@
 
                       echo "<div class='item'>";
                       echo "<img src='{$productImage}' alt='Product Image'>";
-                      echo "<div class='item-info'>";
-                      echo "<h3>{$productName}</h3>";
-                      echo "<p>Quantity: {$productQuantity}</p>";
-                      echo "<p>Price: $" . number_format($productPrice, 2)."</p>";
+                      echo "<div class='item-details'>";
+                      echo "<h3 class='item-name'>{$productName}</h3>";
+                      echo "<p class='item-quantity'><b>Quantity</b>: {$productQuantity}</p>";
+                      echo "<p class='item-price'><b>Price</b>: $" . number_format($productPrice, 2) . "</p>";
                       echo "</div>";
                       echo "</div>";
                   }
@@ -91,5 +91,9 @@
       ?>
     </section>
   </main>
+  <?php
+    include 'footer.html';
+    ?>
 </body>
 </html>
+

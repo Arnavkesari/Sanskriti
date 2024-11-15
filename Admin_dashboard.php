@@ -65,12 +65,12 @@
             // Approve retailer
             $updateSql = "UPDATE Retailer SET Status = 'Approved' WHERE RID = '$retailerID'";
             $conn->query($updateSql);
-            echo "<script>alert('Retailer approved successfully!'); window.location.reload();</script>";
+            echo "'Retailer approved successfully!'";
         } elseif (isset($_POST['reject'])) {
             // Reject retailer
             $updateSql = "UPDATE Retailer SET Status = 'Rejected' WHERE RID = '$retailerID'";
             $conn->query($updateSql);
-            echo "<script>alert('Retailer rejected successfully!'); window.location.reload();</script>";
+            echo "'Retailer rejected successfully!'";
         }
     }
 
@@ -115,11 +115,11 @@
             if (isset($_POST['approve'])) {
                 $updateSql = "UPDATE Products SET Status = 'Approved' WHERE ID = '$productID'";
                 $conn->query($updateSql);
-                echo "<script>alert('Retailer approved successfully!'); window.location.reload();</script>";
+                echo "'Product approved successfully!'";
             } elseif (isset($_POST['reject'])) {
                 $updateSql = "UPDATE Products SET Status = 'Rejected' WHERE ID = '$productID'";
                 $conn->query($updateSql);
-                echo "<script>alert('Retailer approved successfully!'); window.location.reload();</script>";
+                echo "'Product rejected successfully!'";
             }
     }
     $conn->close();
