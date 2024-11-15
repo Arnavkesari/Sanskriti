@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.bigcontainer {
+    max-width: 1200px; /* Increased width for a wider content area */
+    margin: auto;
+    padding: 20px;
+}
+
+/* Un-comment the header iframe styling and set appropriate height */
+header iframe {
+    width: 100%;
+    height: 100px;
+    border: none;
+}
+
+.video-section {
+    margin: 0; /* Remove margin to eliminate space */
+    position: relative;
+    width: 100%;
+    height: 600px; /* Increased height for a better video display */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.overlay {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    text-align: center;
+}
+
+.view-more {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.map-section, .cultural-sites, .artist-products {
+    margin-top: 30px; /* Increased margin for better spacing */
+}
+
+ 
+ 
+/* Add these styles in your CSS file */
+
+.overlay {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.slogan-slider {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.view-more {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.sites-grid ,.products-grid{
+    display: grid;
+    gap: 15px; /* Adjusted gap for tighter spacing */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Larger minimum width */
+    margin-top: 20px;
+}
+
+.site-item ,.product-item {
+    position: relative;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    height: 300px; /* Increased height for larger images */
+}
+
+.site-item img, .product-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images fill the space without distortion */
+}
+
+.site-item:hover , .product-item:hover {
+    transform: scale(1.05); /* Subtle zoom effect on hover */
+}
+
+.site-item p , .product-item p{
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for better text contrast */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.map-container {
+    text-align: center;
+    margin: 20px auto; /* Center the container horizontally */
+    background-color: #1e1e1e; /* Darker shade for a sleek look */
+    border-radius: 15px; /* Rounded corners */
+    padding: 40px; /* Increase padding for better spacing */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for better responsiveness */
+    justify-content: center; /* Center-align content */
+    align-items: center; /* Vertically align content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for a modern touch */
+    gap: 20px; /* Add space between the map and text */
+    transition: background-color 0.4s ease, transform 0.3s, box-shadow 0.3s; /* Smooth background and transform transition */
+}
+
+.map-container:hover {
+    background-color:#044181; /* Slightly lighter shade for hover */
+    /* transform: scale(1.02); Slightly scale up the container on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 0 10px #4CAF50; /* Add glowing shadow effect */
+}
+
+.map-container img {
+    max-width: 100%; /* Ensure image is responsive */
+    width: 550px; /* Set a balanced width for the map */
+    height: auto; /* Preserve aspect ratio */
+    border-radius: 10px; /* Rounded corners for the map image */
+    border: 2px solid #ddd; /* Add a subtle border around the map */
+}
+
+.map-text {
+    color: #f5f5f5; /* Lighter color for text contrast */
+    font-family: 'Georgia', serif; /* Elegant font for text */
+    text-align: left; /* Align text to the left */
+    max-width: 400px; /* Limit text width for better readability */
+    line-height: 1.6; /* Improve line spacing */
+}
