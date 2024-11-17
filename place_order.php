@@ -10,11 +10,18 @@ $customer_id = $_SESSION['ID'];
 $conn->begin_transaction();
 
 try {
-    // Insert into Order table
-    $order_id = uniqid(); // Unique order ID
+    // Fetch the latest Order ID, extract numeric part, increment, and format with "OR" prefix
+    $result = $conn->query("SELECT COALESCE(MAX(CAST(SUBSTRING(ID, 3) AS UNSIGNED)), 99) + 1 AS newOrderID FROM `Order`");
+    if (!$result) {
+        throw new Exception("Failed to fetch max Order ID: " . $conn->error);
+    }
+    $row = $result->fetch_assoc();
+    $order_id = "OR" . $row['newOrderID'];
+
     $date = date('Y-m-d');
     $time = date('H:i:s');
 
+    // Prepare SQL statement to insert order
     $sql = "INSERT INTO `Order` (ID, CustID, Date, Time, Address) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
@@ -24,7 +31,7 @@ try {
     if (!$stmt->execute()) {
         throw new Exception("Failed to execute Order insertion: " . $stmt->error);
     }
-    
+
     // Insert products into Products_in_Order from Cart
     $sql = "INSERT INTO Products_in_Order (OrderID, ProductID, Qty)
             SELECT ?, ProductID, Quantity FROM Cart WHERE CustID = ?";

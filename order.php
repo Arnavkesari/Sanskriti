@@ -41,12 +41,12 @@
           while ($orderRow = $orderResult->fetch_assoc()) {
               $orderID = $orderRow['ID'];
               $orderDate = $orderRow['Date'];
-              $orderStatus = "Shipped"; // Assuming you have a field for status; replace accordingly
+              $orderAddress = $orderRow['Address']; // Assuming you have a field for status; replace accordingly
 
               echo "<div class='order-card'>";
               echo "<h2>Order {$orderID}</h2>";
               echo "<p><strong>Date:</strong> " . date("F j, Y", strtotime($orderDate)) . "</p>";
-              echo "<p><strong>Status:</strong> {$orderStatus}</p>";
+              echo "<p><strong>Delivered Address:</strong> {$orderAddress}</p>";
               echo "<div class='order-items'>";
 
               // Query to get products in the current order

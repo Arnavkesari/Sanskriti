@@ -47,13 +47,15 @@ foreach ($products as $product) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="carts.css">
 </head>
 <body>
+
 <div class="container my-5">
+<h1 class="card-title">My Cart</h1>
     <div class="card my-4">
         <div class="card-body">
-            <h5 class="card-title">Products</h5>
+            
             
             <?php foreach ($products as $product): ?>
             <div class="product-item d-flex align-items-center mb-3">
@@ -78,7 +80,7 @@ foreach ($products as $product) {
             <div class="form-group">
                 <input type="text" id="address" class="form-control" placeholder="Enter Address">
             </div>
-            <button class="btn btn-primary btn-save" onclick="placeOrder()">Save</button>
+            <button class="btn btn-primary btn-save" onclick="placeOrder()">BUY NOW</button>
         </div>
     </div>
 </div>
@@ -128,12 +130,13 @@ function placeOrder() {
     });
 }
 </script>
-
+<?php
+include 'footer.html';
+?>
 </body>
 </html>
 
 <?php
 // Close the database connection
-include 'footer.html';
 $conn->close();
 ?>
