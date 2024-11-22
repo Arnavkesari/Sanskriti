@@ -21,19 +21,19 @@
     $countResult = $conn->query($countSql);
     $pendingCount = $countResult->fetch_assoc()['pending_count'];
 
-    // Query to get pending retailers' details
-    $sql = "SELECT Users.Name AS UserName, Retailer.GST, Users.ID AS UserID, Users.State 
-            FROM Users
-            INNER JOIN Retailer ON Users.ID = Retailer.RID
-            WHERE Retailer.Status = 'Pending'";
-    $result = $conn->query($sql);
     ?>
 
     <section class="Retailer">
         <h2>Pending Retailers (<?php echo $pendingCount; ?>)</h2>
         <div class="retailer-grid">
             <?php
-            if ($result->num_rows > 0) {
+            if ($pendingCount > 0) {
+                // Query to get pending retailers' details
+                   $sql = "SELECT Users.Name AS UserName, Retailer.GST, Users.ID AS UserID, Users.State 
+                   FROM Users
+                   INNER JOIN Retailer ON Users.ID = Retailer.RID
+                   WHERE Retailer.Status = 'Pending'";
+                   $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                     ?>
                     <div class="retailer-card">
@@ -41,7 +41,7 @@
                         <p><strong>GST Number:</strong> <?php echo $row['GST']; ?></p>
                         <p><strong>User ID:</strong> <?php echo $row['UserID']; ?></p>
                         <p><strong>State:</strong> <?php echo $row['State']; ?></p>
-                        <form method="post" action="">
+                        <form method="post" action="retailer_check.php">
                             <input type="hidden" name="retailer_id" value="<?php echo $row['UserID']; ?>">
                             <button type="submit" name="approve" class="approve-btn">Approve</button>
                             <button type="submit" name="reject" class="reject-btn">Reject</button>
@@ -56,32 +56,14 @@
         </div>
     </section>
 
+    
     <?php
-    // Handle approve/reject actions
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $retailerID = $_POST['retailer_id'];
-        
-        if (isset($_POST['approve'])) {
-            // Approve retailer
-            $updateSql = "UPDATE Retailer SET Status = 'Approved' WHERE RID = '$retailerID'";
-            $conn->query($updateSql);
-            echo "'Retailer approved successfully!'";
-        } elseif (isset($_POST['reject'])) {
-            // Reject retailer
-            $updateSql = "UPDATE Retailer SET Status = 'Rejected' WHERE RID = '$retailerID'";
-            $conn->query($updateSql);
-            echo "'Retailer rejected successfully!'";
-        }
-    }
-
-    ?>
-    <?php
-        $countSql = "SELECT COUNT(*) AS pending_count FROM Products WHERE Status = 'Pending'";
+        $countSql = "SELECT COUNT(*) AS pending_count FROM pendingproducts";
         $countResult = $conn->query($countSql);
         $pendingCount1 = $countResult->fetch_assoc()['pending_count'];
 
         $pendingProducts = [];
-        $result = mysqli_query($conn, "SELECT * FROM Products WHERE Status = 'Pending'");
+        $result = mysqli_query($conn, "SELECT * FROM pendingproducts");
         if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
             $pendingProducts[] = $row;
@@ -99,7 +81,7 @@
                         <p class="price">$<?= htmlspecialchars($product['Price']) ?></p>
                         <p class="stock-quantity">In Stock: <span><?= htmlspecialchars($product['Quantity']) ?></span></p>
                         <div class="action-buttons">
-                            <form method="post" action="">
+                            <form method="post" action="product_check.php">
                                 <input type="hidden" name="product_id" value="<?= $product['ID'] ?>">
                                 <button type="submit" name="approve" class="approve-product">Approve</button>
                                 <button type="submit" name="reject" class="reject-product">Reject</button>
@@ -108,22 +90,13 @@
                     </div>
                 <?php endforeach; ?>
             </div>
+        <?php
+        if($pendingCount1==0)
+        echo "<p>No pending products at the moment.</p>";
+
+        ?> 
     </section>
-    <?php
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $productID = $_POST['product_id'];
-            if (isset($_POST['approve'])) {
-                $updateSql = "UPDATE Products SET Status = 'Approved' WHERE ID = '$productID'";
-                $conn->query($updateSql);
-                echo "'Product approved successfully!'";
-            } elseif (isset($_POST['reject'])) {
-                $updateSql = "UPDATE Products SET Status = 'Rejected' WHERE ID = '$productID'";
-                $conn->query($updateSql);
-                echo "'Product rejected successfully!'";
-            }
-    }
-    $conn->close();
-    ?>
-    <?php include 'footer.php'; ?>
+    
+    <?php  $conn->close();include 'footer.php'; ?>
 </body>
 </html>
