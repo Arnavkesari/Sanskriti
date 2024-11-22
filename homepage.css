@@ -1,4 +1,5 @@
 /* General Reset */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -55,18 +56,60 @@ header {
     gap: 20px;
 }
 
+#slogan-text {
+    display: inline-block;
+    font-family: 'Georgia', serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    position: relative;
+  }
+  
+  #slogan-text::after {
+    content: '|';
+    font-weight: normal;
+    color: white;
+    position: absolute;
+    right: -5px; /* Position it slightly to the right of the text */
+    animation: blink 0.6s steps(2, start) infinite;
+  }
+  
+  /* Blinking animation */
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced Button Styling */
 .view-more {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
+    padding: 12px 25px;
+    background-color: #00bcd4;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 8px;
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
 .view-more:hover {
-    background-color: #0056b3;
+    background-color: #008c9e;
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
 
 
