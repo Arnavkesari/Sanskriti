@@ -58,12 +58,12 @@
 
     
     <?php
-        $countSql = "SELECT COUNT(*) AS pending_count FROM pendingproducts";
+        $countSql = "SELECT COUNT(*) AS pending_count FROM pendingProducts";
         $countResult = $conn->query($countSql);
         $pendingCount1 = $countResult->fetch_assoc()['pending_count'];
 
         $pendingProducts = [];
-        $result = mysqli_query($conn, "SELECT * FROM pendingproducts");
+        $result = mysqli_query($conn, "SELECT * FROM pendingProducts");
         if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
             $pendingProducts[] = $row;

@@ -29,12 +29,12 @@ if (isset($_GET['id'])) {
         $products = $productsStmt->get_result()->fetch_all(MYSQLI_ASSOC);
     } else {
         // Redirect to home or show an error if the state ID is invalid
-        header("Location: home.html");
+        header("Location: homepage.php");
         exit();
     }
 } else {
     // Redirect to home if no state ID is provided
-    header("Location: homepage.html");
+    header("Location: homepage.php");
     exit();
 }
 
@@ -46,41 +46,58 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanskriti - Cultural Heritage of <?php echo htmlspecialchars($state['Name']); ?></title>
-    <link rel="stylesheet" href="state.css">
+    <link rel="stylesheet" href="state.css?ver=1.8">
 </head>
 <body>
 
 <div class="container">
     <!-- State Information Section -->
-    <div class="video-section">
-        <h2><?php echo htmlspecialchars($state['Name']); ?></h2>
-        <p><?php echo htmlspecialchars($state['About']); ?></p>
-        <p><strong>Language:</strong> <?php echo htmlspecialchars($state['Lang']); ?></p>
-        <p><strong>Dance Forms:</strong> <?php echo htmlspecialchars($state['Dance_Forms']); ?></p>
-        <p><strong>Cuisine:</strong> <?php echo htmlspecialchars($state['Cuisine']); ?></p>
-        <p><strong>Clothing:</strong> <?php echo htmlspecialchars($state['Clothing']); ?></p>
+    <div class="state-section">
+        <div class="stateInfo">
+            <h1><?php echo htmlspecialchars($state['Name']); ?></h1>
+            <p><?php echo htmlspecialchars($state['About']); ?></p>
+            <p><strong>Language:</strong> <?php echo htmlspecialchars($state['Lang']); ?></p>
+            <p><strong>Dance Forms:</strong> <?php echo htmlspecialchars($state['Dance_Forms']); ?></p>
+            <p><strong>Cuisine:</strong> <?php echo htmlspecialchars($state['Cuisine']); ?></p>
+            <p><strong>Clothing:</strong> <?php echo htmlspecialchars($state['Clothing']); ?></p>
+        </div>
+        <div>
+            <img src="<?php echo htmlspecialchars($state['Image']); ?>" alt="">
+        </div>
     </div>
 
     <!-- Cultural Sites Section -->
-    <div class="cultural-sites">
-        <h3>Cultural Sites</h3>
-        <?php foreach ($culturalSites as $site): ?>
-            <div class="site">
-                <img src="<?php echo htmlspecialchars($site['Image']); ?>" alt="<?php echo htmlspecialchars($site['Name']); ?>">
-                <div class="description"><?php echo htmlspecialchars($site['Description']); ?></div>
-            </div>
-        <?php endforeach; ?>
+    <div class="content-box">
+        <h1>Cultural Sites</h1>
+        <div class="tile-grid">
+            <?php foreach ($culturalSites as $site): ?>
+                <div class="debit-card">
+                    <div class="debit-card-inner">
+                        <div class="debit-card-front">
+                        <img src="<?php echo htmlspecialchars($site['Image']); ?>" alt="<?php echo htmlspecialchars($site['Name']); ?>">
+                        </div>
+                        <div class="debit-card-back">
+                            <div class="title"><?php echo htmlspecialchars($site['Name']); ?></div>
+                            <p><?php echo htmlspecialchars($site['Description']); ?></p>
+                            <div class="loc">Location: <?php echo htmlspecialchars($site['Location']); ?></div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 
     <!-- Products Section -->
-    <div class="products">
-        <h3>Local Artist Products</h3>
-        <?php foreach ($products as $product): ?>
-            <div class="product">
-                <img src="<?php echo htmlspecialchars($product['Image']); ?>" alt="<?php echo htmlspecialchars($product['Name']); ?>">
-                <div class="message">Buy now for a unique experience!</div>
-            </div>
-        <?php endforeach; ?>
+    <div class="content-box">
+        <h1>Local Artist Products</h1>
+        <div class="tile-grid">
+            <?php foreach ($products as $product): ?>
+                <div class="product">
+                    <a href="mart.php"><img src="<?php echo htmlspecialchars($product['Image']); ?>" alt="<?php echo htmlspecialchars($product['Name']); ?>"></a>
+                    <div class="message"><?php echo htmlspecialchars($product['Name']); ?></div>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 </div>
 
