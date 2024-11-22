@@ -11,6 +11,11 @@
     <header>
         <?php include 'header.php'; ?>
     </header>
+
+    <?php if (isset($_GET['newuser']) && $_GET['newuser'] == 'true'): ?>
+    <p style="color: green; text-align: center; font-weight: bold; margin-top: 20px;">User created successfully, login now</p>
+    <?php endif; ?>
+
     <main class="container" >
         <h2>LOGIN</h2>
         <form class="form-container" action="login_action.php" method="POST">
@@ -21,7 +26,7 @@
             <input type="password" id="password" name="password" required>
 
             <div id="save">
-                <button type="button" class="register-button" ><a href="register.html" > Register</a> </button>
+                <button type="button" class="register-button" ><a href="register.php" > Register</a> </button>
                 <button type="submit" class="submit-button">Login Now</button>
             </div>
         </form>

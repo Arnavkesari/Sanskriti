@@ -24,7 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssssssss", $id, $pass, $phone, $email, $name, $street, $city, $state, $pincode, $userType);
 
     if ($stmt->execute()) {
-        echo "Registration successful!";
+        
+        header('Location: login.php?newuser=true');
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -37,7 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $retailerStmt->bind_param("ss", $id, $gstin);
 
         if ($retailerStmt->execute()) {
-            echo "Retailer information submitted successfully!";
+            
+            header('Location: login.php?newuser=true');
         } else {
             echo "Error: " . $retailerStmt->error;
         }
