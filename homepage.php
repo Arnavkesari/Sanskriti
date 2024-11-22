@@ -26,60 +26,62 @@
         <a href="#cultural-sites" id="view-more" class="view-more">View More</a>
       </div>
       <script>
-        // Array of slogans
-        const slogans = [
-          "Celebrating India's Rich Culture",
-          "Diversity in Every Corner",
-          "Experience Timeless Traditions",
-          "India: Where Culture Thrives",
-          "Discover the Heart of Heritage",
-        ];
+        document.addEventListener("DOMContentLoaded", function () {
+          // Array of slogans
+          const slogans = [
+            "Celebrating India's Rich Culture",
+            "Diversity in Every Corner",
+            "Experience Timeless Traditions",
+            "India: Where Culture Thrives",
+            "Discover the Heart of Heritage",
+          ];
 
-        let sloganIndex = 0;
-        let charIndex = 0;
-        const typingSpeed = 100; // Speed of typing (milliseconds)
-        const pauseBetweenSlogans = 2000; // Pause between slogans (milliseconds)
-        const sloganText = document.getElementById("slogan-text");
+          let sloganIndex = 0;
+          let charIndex = 0;
+          const typingSpeed = 100; // Speed of typing (milliseconds)
+          const pauseBetweenSlogans = 2000; // Pause between slogans (milliseconds)
+          const sloganText = document.getElementById("slogan-text");
 
-        function typeSlogan() {
-          // Get the current slogan
-          const currentSlogan = slogans[sloganIndex];
+          function typeSlogan() {
+            // Get the current slogan
+            const currentSlogan = slogans[sloganIndex];
 
-          // Display the next character
-          if (charIndex < currentSlogan.length) {
-            sloganText.textContent += currentSlogan.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeSlogan, typingSpeed);
-          } else {
-            // Pause after finishing the slogan, then proceed to the next one
-            setTimeout(() => {
-              // Reset text and move to the next slogan
-              sloganText.textContent = "";
-              charIndex = 0;
-              sloganIndex = (sloganIndex + 1) % slogans.length;
-              typeSlogan();
-            }, pauseBetweenSlogans);
+            // Display the next character
+            if (charIndex < currentSlogan.length) {
+              sloganText.textContent += currentSlogan.charAt(charIndex);
+              charIndex++;
+              setTimeout(typeSlogan, typingSpeed);
+            } else {
+              // Pause after finishing the slogan, then proceed to the next one
+              setTimeout(() => {
+                // Reset text and move to the next slogan
+                sloganText.textContent = "";
+                charIndex = 0;
+                sloganIndex = (sloganIndex + 1) % slogans.length;
+                typeSlogan();
+              }, pauseBetweenSlogans);
+            }
           }
-        }
 
-        // Start the typewriter effect when the page loads
-        window.onload = typeSlogan;
-        document
-          .getElementById("view-more")
-          .addEventListener("click", function (event) {
-            event.preventDefault(); // Prevent default anchor behavior
+          // Start the typewriter effect when the page loads
+          typeSlogan();
+          document
+            .getElementById("view-more")
+            .addEventListener("click", function (event) {
+              event.preventDefault(); // Prevent default anchor behavior
 
-            const target = document.querySelector("#cultural-sites");
-            const headerOffset = 100; // Adjust offset based on header height
-            const elementPosition =
-              target.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = elementPosition - headerOffset;
+              const target = document.querySelector("#cultural-sites");
+              const headerOffset = 100; // Adjust offset based on header height
+              const elementPosition =
+                target.getBoundingClientRect().top + window.pageYOffset;
+              const offsetPosition = elementPosition - headerOffset;
 
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: "smooth",
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth",
+              });
             });
-          });
+        });
       </script>
     </div>
 

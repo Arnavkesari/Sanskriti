@@ -1,4 +1,4 @@
-
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -7,161 +7,165 @@
 
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    overflow-x: hidden;
 }
 
-.bigcontainer {
-    max-width: 1200px; /* Increased width for a wider content area */
-    margin: auto;
-    padding: 20px;
-}
-
-/* Un-comment the header iframe styling and set appropriate height */
-/* header iframe {
+/* Header */
+header {
     width: 100%;
-    height: 100px;
-    border: none;
-} */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    
+}
 
+/* Video Section */
 .video-section {
-    margin: 0; /* Remove margin to eliminate space */
-    position: relative;
     width: 100%;
-    height: 600px; /* Increased height for a better video display */
-    overflow: hidden;
+    height: 100vh; /* Full viewport height */
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 100px; /* Adjust this to account for header height */
+    background-color: black; /* Fallback for loading issues */
 }
 
 .background-video {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    top: 50%;
+    left: 50%;
+    width: auto; /* Ensures proper scaling */
+    height: auto;
+    min-width: 100%; /* Covers entire width */
+    min-height: 100%; /* Covers entire height */
+    transform: translate(-50%, -50%); /* Centers the video */
+    object-fit: cover; /* Ensures it fills the section */
     z-index: 0;
 }
 
 .overlay {
-    position: relative;
-    z-index: 1;
-    color: #fff;
+    margin-top: 200px;
+    z-index: 100;
     text-align: center;
-}
-
-.view-more {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.map-section, .cultural-sites, .artist-products {
-    margin-top: 30px; /* Increased margin for better spacing */
-}
-
- 
- 
-/* Add these styles in your CSS file */
-
-.overlay {
-    position: relative;
-    z-index: 1;
-    color: #fff;
-    text-align: center;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-}
-
-.slogan-slider {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
+    gap: 20px;
 }
 
 .view-more {
-    display: inline-block;
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
-.sites-grid ,.products-grid{
+
+.view-more:hover {
+    background-color: #0056b3;
+}
+
+
+/* Sections Below Video */
+.bigcontainer {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    padding-top: 600px; /* Add space for smoother transition */
+}
+
+.map-container,
+.cultural-sites,
+.artist-products {
+    margin-top: 50px; /* Space between sections */
+}
+
+/* Map Section */
+.map-container {
+    text-align: center;
+    background-color: #1e1e1e;
+    border-radius: 15px;
+    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    gap: 20px;
+    transition: background-color 0.4s ease, transform 0.3s, box-shadow 0.3s;
+}
+
+.map-container:hover {
+    background-color: #044181;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 0 10px #4CAF50;
+}
+
+.map-container img {
+    max-width: 100%;
+    width: 550px;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+}
+
+.map-text {
+    color: #f5f5f5;
+    font-family: 'Georgia', serif;
+    text-align: left;
+    max-width: 400px;
+    line-height: 1.6;
+}
+
+/* Grid Styling for Cultural Sites and Artist Products */
+.sites-grid,
+.products-grid {
     display: grid;
-    gap: 15px; /* Adjusted gap for tighter spacing */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Larger minimum width */
+    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     margin-top: 20px;
 }
 
-.site-item ,.product-item {
+.site-item,
+.product-item {
     position: relative;
     background-color: #f0f0f0;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s;
-    height: 300px; /* Increased height for larger images */
+    height: 300px;
 }
 
-.site-item img, .product-item img {
+.site-item img,
+.product-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures images fill the space without distortion */
+    object-fit: cover;
 }
 
-.site-item:hover , .product-item:hover {
-    transform: scale(1.05); /* Subtle zoom effect on hover */
+.site-item:hover,
+.product-item:hover {
+    transform: scale(1.05);
 }
 
-.site-item p , .product-item p{
+.site-item p,
+.product-item p {
     padding: 10px;
     font-size: 16px;
     color: #fff;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for better text contrast */
+    background-color: rgba(0, 0, 0, 0.6);
     position: absolute;
     bottom: 0;
     width: 100%;
 }
 
-.map-container {
-    text-align: center;
-    margin: 20px auto; /* Center the container horizontally */
-    background-color: #1e1e1e; /* Darker shade for a sleek look */
-    border-radius: 15px; /* Rounded corners */
-    padding: 40px; /* Increase padding for better spacing */
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping for better responsiveness */
-    justify-content: center; /* Center-align content */
-    align-items: center; /* Vertically align content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for a modern touch */
-    gap: 20px; /* Add space between the map and text */
-    transition: background-color 0.4s ease, transform 0.3s, box-shadow 0.3s; /* Smooth background and transform transition */
-}
-
-.map-container:hover {
-    background-color:#044181; /* Slightly lighter shade for hover */
-    /* transform: scale(1.02); Slightly scale up the container on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 0 10px #4CAF50; /* Add glowing shadow effect */
-}
-
-.map-container img {
-    max-width: 100%; /* Ensure image is responsive */
-    width: 550px; /* Set a balanced width for the map */
-    height: auto; /* Preserve aspect ratio */
-    border-radius: 10px; /* Rounded corners for the map image */
-    border: 2px solid #ddd; /* Add a subtle border around the map */
-}
-
-.map-text {
-    color: #f5f5f5; /* Lighter color for text contrast */
-    font-family: 'Georgia', serif; /* Elegant font for text */
-    text-align: left; /* Align text to the left */
-    max-width: 400px; /* Limit text width for better readability */
-    line-height: 1.6; /* Improve line spacing */
+/* Footer */
+footer {
+    margin-top: 50px;
 }
