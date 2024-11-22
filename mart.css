@@ -168,7 +168,10 @@ header, footer {
     white-space: nowrap;
     transition: background-color 0.3s;
 }
-
+.regions-container a{
+    text-decoration: none;
+    color: black;
+}
 .region-tile:hover {
     background-color: #ddd;
 }

@@ -17,17 +17,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    function fetchProductsByState(stateName) {
-        fetch(`fetch_products_by_state.php?state=${encodeURIComponent(stateName)}`)
-            .then(response => response.text())
-            .then(data => {
-                const productGrid = document.querySelector('.product-grid');
-                productGrid.innerHTML = data;
-            })
-            .catch(error => {
-                console.error("Error fetching products:", error);
-            });
-    }
+    // function fetchProductsByState(stateName) {
+    //     fetch(`fetch_products_by_state.php?state=${encodeURIComponent(stateName)}`)
+    //         .then(response => response.text())
+    //         .then(data => {
+    //             const productGrid = document.querySelector('.product-grid');
+    //             productGrid.innerHTML = data;
+    //         })
+    //         .catch(error => {
+    //             console.error("Error fetching products:", error);
+    //         });
+    // }
 });
 
 // Quantity selector in product card functionality

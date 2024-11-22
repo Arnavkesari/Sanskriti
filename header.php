@@ -124,6 +124,7 @@ session_start();
             <a href="./retailer_dashboard.php">Profile</a>
           <?php elseif($_SESSION['user_type'] == 'Customer'): ?>
             <a href="./user_dashboard.php">Profile</a>
+            <a href="./order.php">Orders</a>
           <?php else: ?>
             <a href="./Admin_dashboard.php">Profile</a>
           <?php endif; ?>
