@@ -110,12 +110,18 @@ function updateQuantity(productId, action) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            location.reload(); // Refresh page to show updated quantity
+            if (data.quantity === 0) {
+                // Optionally remove the product from the UI without reload
+                document.querySelector(`[data-product-id="${productId}"]`).closest('.product-item').remove();
+            } else {
+                location.reload(); // Refresh page to show updated quantity
+            }
         } else {
             alert(data.message);
         }
     });
 }
+
 
 // Function to place an order
 function placeOrder() {
