@@ -9,7 +9,6 @@ if (!isset($_SESSION['ID']) || $_SESSION['user_type'] != 'Retailer') {
 }
 
 $retailerID = $_SESSION['ID'];
-// Fetch products for the logged-in retailer
 $pendingProducts = [];
 $listedProducts = [];
 
@@ -21,7 +20,7 @@ if ($result) {
     }
 }
 
-// Fetch approved products
+// Fetch approved (listed) products
 $result = mysqli_query($conn, "SELECT * FROM Products WHERE RID = '$retailerID'");
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
@@ -51,7 +50,6 @@ mysqli_close($conn);
         </a>
     </div>
 
-
     <!-- Pending Products -->
     <section class="products">
         <h2>Pending Products</h2>
@@ -67,7 +65,7 @@ mysqli_close($conn);
                         <p class="price">$<?= htmlspecialchars($product['Price']) ?></p>
                         <p class="stock-quantity">In Stock: <span><?= htmlspecialchars($product['Quantity']) ?></span></p>
                         <div class="action-buttons">
-                            <button class="delete-product" onclick="openModal('<?= htmlspecialchars($product['ID'], ENT_QUOTES) ?>')">Delete</button>
+                            <button class="delete-product" onclick="openModal('delete_pending_product', '<?= htmlspecialchars($product['ID']) ?>')">Delete</button>
                             <button class="update-product" onclick="window.location.href='updateProduct.php?productID=<?= $product['ID'] ?>'">Update</button>
                         </div>
                     </div>
@@ -75,7 +73,6 @@ mysqli_close($conn);
             <?php endif; ?>
         </div>
     </section>
-
 
     <!-- Listed Products -->
     <section class="products">
@@ -92,7 +89,7 @@ mysqli_close($conn);
                         <p class="price">$<?= htmlspecialchars($product['Price']) ?></p>
                         <p class="stock-quantity">In Stock: <span><?= htmlspecialchars($product['Quantity']) ?></span></p>
                         <div class="action-buttons">
-                            <button class="delete-product" onclick="openModal('<?= htmlspecialchars($product['ID'], ENT_QUOTES) ?>')">Delete</button>
+                            <button class="delete-product" onclick="openModal('delete_product', '<?= htmlspecialchars($product['ID']) ?>')">Delete</button>
                             <button class="update-product" onclick="window.location.href='updateProduct.php?productID=<?= $product['ID'] ?>'">Update</button>
                         </div>
                     </div>
@@ -101,29 +98,29 @@ mysqli_close($conn);
         </div>
     </section>
 
-
     <?php include 'footer.php'; ?>
 
     <!-- Modal for delete confirmation -->
     <div class="modal" id="deleteModal">
         <div class="modal-content">
             <p>Are you sure you want to delete this product?</p>
-            <button class="confirm-delete" onclick="confirmDelete()">Yes, Delete</button>
+            <button class="confirm-delete" id="confirmDeleteButton">Yes, Delete</button>
             <button class="cancel-delete" onclick="closeModal()">Cancel</button>
         </div>
     </div>
-
 
     <!-- Notification for delete success -->
     <div class="notification" id="deleteNotification">Product deleted successfully!</div>
 
     <script>
         let productIDToDelete = null;
+        let deleteType = null; // To differentiate between pending and listed products
 
         // Function to open the modal and set the product ID to delete
-        function openModal(productID) {
-            console.log("Opening modal for product ID:", productID);
+        function openModal(type, productID) {
+            console.log(`Opening modal for product ID: ${productID}, Type: ${type}`);
             productIDToDelete = productID;
+            deleteType = type;
             document.getElementById("deleteModal").style.display = "flex";
         }
 
@@ -131,8 +128,8 @@ mysqli_close($conn);
         function closeModal() {
             document.getElementById("deleteModal").style.display = "none";
             productIDToDelete = null;
+            deleteType = null;
         }
-
 
         // Function to show notification
         function showNotification() {
@@ -146,29 +143,31 @@ mysqli_close($conn);
         }
 
         // Function to confirm deletion and send AJAX request
-        function confirmDelete() {
-            if (productIDToDelete) {
-                fetch('delete_product.php', {
+        document.getElementById("confirmDeleteButton").onclick = function () {
+            if (productIDToDelete && deleteType) {
+                const endpoint = deleteType === 'delete_pending_product' ? 'delete_pending_product.php' : 'delete_product.php';
+
+                fetch(endpoint, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ productID: productIDToDelete })
+                    body: JSON.stringify({ productID: productIDToDelete }),
                 })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Remove the product card from the DOM
-                        document.querySelector(`.product-card[data-product-id='${productIDToDelete}']`).remove();
-                        showNotification();
-                    } else {
-                        console.error("Error:", data.error);
-                    }
-                    closeModal();
-                })
-                .catch(error => console.error("Error:", error));
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Remove the product card from the DOM
+                            document.querySelector(`.product-card[data-product-id='${productIDToDelete}']`).remove();
+                            showNotification();
+                        } else {
+                            console.error('Error:', data.error);
+                        }
+                        closeModal();
+                    })
+                    .catch(error => console.error('Error:', error));
             }
-        }
+        };
     </script>
 </body>
 </html>

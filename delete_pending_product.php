@@ -7,8 +7,8 @@ $data = json_decode(file_get_contents("php://input"), true);
 if (isset($data['productID'])) {
     $productID = $data['productID'];
 
-    // Delete the product from the Products table
-    $sql = "DELETE FROM Products WHERE ID = ?";
+    // Delete the product from the pendingProducts table
+    $sql = "DELETE FROM pendingProducts WHERE ID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $productID);
 
