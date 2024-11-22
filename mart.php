@@ -15,37 +15,34 @@
 
     <div class="banner-slider">
         <div class="slides-container" id="slidesContainer">
-                <div class="slide">
-                    <img src="https://via.placeholder.com/800x300?text=Slide+1" alt="Slide 1">
-                    <div class="slide-content">
-                        <h2>Welcome to Our Shop</h2>
-                        <p>Discover amazing products and offers!</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="https://via.placeholder.com/800x300?text=Slide+1" alt="Slide 2">
-                    <div class="slide-content">
-                        <h2>Exclusive Deals</h2>
-                        <p>Only for a limited time!</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="https://via.placeholder.com/800x300?text=Slide+1" alt="Slide 3">
-                    <div class="slide-content">
-                        <h2>Shop Local Art</h2>
-                        <p>Support local artisans and artists.</p>
-                    </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/800x300?text=Slide+1" alt="Slide 1">
+                <div class="slide-content">
+                    <h2>Welcome to Our Shop</h2>
+                    <p>Discover amazing products and offers!</p>
                 </div>
             </div>
-        
-            <button class="slider-nav left" onclick="prevSlide()">&#10094;</button>
-            <button class="slider-nav right" onclick="nextSlide()">&#10095;</button>
-        
-            <div class="pagination-dots" id="paginationDots">
-                <span onclick="goToSlide(0)" class="dot active"></span>
-                <span onclick="goToSlide(1)" class="dot"></span>
-                <span onclick="goToSlide(2)" class="dot"></span>
+            <div class="slide">
+                <img src="https://via.placeholder.com/800x300?text=Slide+1" alt="Slide 2">
+                <div class="slide-content">
+                    <h2>Exclusive Deals</h2>
+                    <p>Only for a limited time!</p>
+                </div>
             </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/800x300?text=Slide+1" alt="Slide 3">
+                <div class="slide-content">
+                    <h2>Shop Local Art</h2>
+                    <p>Support local artisans and artists.</p>
+                </div>
+            </div>
+        </div>
+        <button class="slider-nav left" onclick="prevSlide()">&#10094;</button>
+        <button class="slider-nav right" onclick="nextSlide()">&#10095;</button>
+        <div class="pagination-dots" id="paginationDots">
+            <span onclick="goToSlide(0)" class="dot active"></span>
+            <span onclick="goToSlide(1)" class="dot"></span>
+            <span onclick="goToSlide(2)" class="dot"></span>
         </div>
     </div>
 
@@ -86,7 +83,7 @@
         <h2>Products</h2>
         <div class="product-grid">
             <?php
-                // Fetch approved products
+                // Default query to fetch all products
                 $sql = "SELECT ID, Name, Description, Image, Price, Quantity FROM Products";
                 $result = $conn->query($sql);
 
@@ -102,30 +99,13 @@
                         echo '<span class="quantity">1</span>';
                         echo '<button class="increment" onclick="updateQuantity(this, 1)">+</button>';
                         echo '</div>';
-                        echo '<button class="add-to-cart">Add to Cart</button>';
+                        echo '<button class="add-to-cart" data-product-id="' . htmlspecialchars($row["ID"]) . '">Add to Cart</button>';
                         echo '</div>';
                     }
                 } else {
                     echo "No products available.";
                 }
             ?>
-        </div>
-    </section>
-
-    <section class="local-artist">
-        <h2>Local Artist</h2>
-        <div class="artist-grid">
-            <div class="artist-card">
-                <img src="https://via.placeholder.com/80" alt="Artist">
-                <p>Artist Name</p>
-                <p>Village</p>
-            </div>
-            <div class="artist-card">
-                <img src="https://via.placeholder.com/80" alt="Artist">
-                <p>Artist Name</p>
-                <p>Village</p>
-            </div>
-            <!-- Add more artist cards as needed -->
         </div>
     </section>
 
