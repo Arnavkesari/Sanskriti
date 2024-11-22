@@ -123,18 +123,18 @@
             <div class="footer-section">
                 <h3>Discover India's Soul</h3>
                 <ul>
-                    <li><a href="#">Indian Culture</a></li>
-                    <li><a href="#">Incredible India</a></li>
-                    <li><a href="#">Ministry of Culture</a></li>
-                    <li><a href="#">Swachh Bharat</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/List_of_geographical_indications_in_India">Indian GI Tags</a></li>
+                    <li><a href="https://whc.unesco.org/en/statesparties/in">Incredible India</a></li>
+                    <li><a href="https://www.indiaculture.gov.in/">Ministry of Culture</a></li>
+                    <li><a href="https://swachhbharatmission.ddws.gov.in/">Swachh Bharat</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Visit For More</h3>
                 <ul>
-                    <li><a href="#">My Government</a></li>
-                    <li><a href="#">Digital India</a></li>
-                    <li><a href="#">Ministry of Tourism</a></li>
+                    <li><a href="https://www.india.gov.in/">My Government</a></li>
+                    <li><a href="https://www.digitalindia.gov.in/">Digital India</a></li>
+                    <li><a href="https://tourism.gov.in/">Ministry of Tourism</a></li>
                 </ul>
             </div>
             <div class="footer-section">

@@ -2,7 +2,7 @@
 session_start();
 include 'db_connection.php'; // Include the database connection file
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['ID'])) {
     $data = json_decode(file_get_contents('php://input'), true);
 
     $productId = $data['productId'];
@@ -29,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "User not logged in.";
     }
 }
-
+else {
+    echo "Please login First";
+}
 $conn->close();
 ?>
