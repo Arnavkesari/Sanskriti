@@ -4,7 +4,7 @@ include 'db_connection.php'; // Database connection
 if (isset($_GET['state'])) {
     $state = $_GET['state'];
 
-    $stmt = $conn->prepare("SELECT Products.ID, Products.Name, Products.Description, Products.Image, Products.Price, Products.Quantity 
+    $stmt = $conn->prepare("SELECT Products.ID, Products.Name, Products.Description, Products.Image, Products.Price, Products.Quantity ,States.Name AS sname
                             FROM Products 
                             JOIN States ON Products.StateID = States.ID 
                             WHERE States.Name = ?");
@@ -17,8 +17,9 @@ if (isset($_GET['state'])) {
             echo '<div class="product-card">';
             echo '<img src="' . htmlspecialchars($row["Image"]) . '" alt="Product Image">';
             echo '<h3>' . htmlspecialchars($row["Name"]) . '</h3>';
+            echo '<p class="state">' . htmlspecialchars($row["sname"]) . '</p>';
             echo '<p class="description">' . htmlspecialchars($row["Description"]) . '</p>';
-            echo '<p class="price">$' . htmlspecialchars($row["Price"]) . '</p>';
+            echo '<p class="price">Rs ' . htmlspecialchars($row["Price"]) . '</p>';
             echo '<div class="quantity-selector">';
             echo '<button class="decrement" onclick="updateQuantity(this, -1)">−</button>';
             echo '<span class="quantity">1</span>';

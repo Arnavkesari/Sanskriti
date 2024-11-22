@@ -261,7 +261,12 @@ header, footer {
     color: #333;
     margin-bottom: 10px;
 }
-
+.product-card .state {
+    font-size: 14px;
+    font-weight: bold;
+    color: #490d0d;
+    margin-bottom: 10px;
+}
 .quantity-selector {
     display: flex;
     align-items: center;

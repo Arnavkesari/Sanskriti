@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MarketPlace</title>
-    <link rel="stylesheet" href="mart.css?ver=1.3">
+    <link rel="stylesheet" href="mart.css?ver=1.4">
 </head>
 <body>
     <?php
@@ -84,7 +84,11 @@
         <div class="product-grid">
             <?php
                 // Default query to fetch all products
-                $sql = "SELECT ID, Name, Description, Image, Price, Quantity FROM Products";
+                // $sql = "SELECT ID, Name, Description, Image, Price, Quantity FROM Products";
+
+                $sql="SELECT Products.ID, Products.Name, Products.Description, Products.Image, Products.Price, Products.Quantity ,States.Name AS sname
+                            FROM Products 
+                            JOIN States ON Products.StateID = States.ID";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -92,8 +96,9 @@
                         echo '<div class="product-card">';
                         echo '<img src="' . htmlspecialchars($row["Image"]) . '" alt="Product Image">';
                         echo '<h3>' . htmlspecialchars($row["Name"]) . '</h3>';
+                        echo '<p class="state">' . htmlspecialchars($row["sname"]) . '</p>';
                         echo '<p class="description">' . htmlspecialchars($row["Description"]) . '</p>';
-                        echo '<p class="price">$' . htmlspecialchars($row["Price"]) . '</p>';
+                        echo '<p class="price">Rs ' . htmlspecialchars($row["Price"]) . '</p>';
                         echo '<div class="quantity-selector">';
                         echo '<button class="decrement" onclick="updateQuantity(this, -1)">−</button>';
                         echo '<span class="quantity">1</span>';
