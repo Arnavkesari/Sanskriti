@@ -9,16 +9,6 @@
 <body>
     <?php
     session_start();
-
-    // if (isset($_SESSION['ID'])) {
-    //     echo "User is logged in. ID: " . $_SESSION['ID'] . ", Name: " . $_SESSION['user_name'] . ", User Type: " . $_SESSION['user_type'];
-    // } else {
-    //     echo "User is not logged in.";
-    // }
-// if (!isset($_SESSION['user_id'])) {
-//     header("Location: login.php"); // Redirect to login if not logged in
-//     exit();
-// }
     include 'db_connection.php'; // Include the database connection file
     include 'header.php'; // Include the header file
     ?>
@@ -97,7 +87,7 @@
         <div class="product-grid">
             <?php
                 // Fetch approved products
-                $sql = "SELECT ID, Name, Description, Image, Price, Quantity FROM Products WHERE Status = 'Approved'";
+                $sql = "SELECT ID, Name, Description, Image, Price, Quantity FROM Products";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {

@@ -14,7 +14,7 @@ $pendingProducts = [];
 $listedProducts = [];
 
 // Fetch pending products
-$result = mysqli_query($conn, "SELECT * FROM Products WHERE RID = '$retailerID' AND Status = 'Pending'");
+$result = mysqli_query($conn, "SELECT * FROM pendingProducts WHERE RID = '$retailerID'");
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         $pendingProducts[] = $row;
@@ -22,7 +22,7 @@ if ($result) {
 }
 
 // Fetch approved products
-$result = mysqli_query($conn, "SELECT * FROM Products WHERE RID = '$retailerID' AND Status = 'Approved'");
+$result = mysqli_query($conn, "SELECT * FROM Products WHERE RID = '$retailerID'");
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         $listedProducts[] = $row;

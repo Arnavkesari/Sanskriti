@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stateID = $stateRow['ID'];
 
         // Insert the new product into the Products table
-        $sql = "INSERT INTO Products (Name, Price, Quantity, Description, Image, StateID, RID, Status)
-                VALUES ('$productName', '$price', '$quantity', '$description', '$imagePath', '$stateID', '$retailerID', 'Pending')";
+        $sql = "INSERT INTO pendingProducts (Name, Price, Quantity, Description, Image, StateID, RID, ID)
+                VALUES ('$productName', '$price', '$quantity', '$description', '$imagePath', '$stateID', '$retailerID', 'NEWPR')";
 
         if (mysqli_query($conn, $sql)) {
             echo "Product added successfully!";
