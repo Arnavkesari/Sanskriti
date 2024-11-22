@@ -9,19 +9,13 @@
   </head>
   <body>
     <header>
-      <iframe
-        src="header.html"
-        width="100%"
-        height="100"
-        frameborder="0"
-        style="margin-bottom: 0px"
-      ></iframe>
+      <?php include 'header.php'; ?>
     </header>
 
     <div class="video-section">
       <video autoplay muted loop class="background-video">
         <source
-          src=""
+          src="./assets/videos/Welcome to India ! [CINEMATIC TRAVEL FILM]_Full-HD.mp4"
           type="video/mp4"
         />
       </video>
@@ -206,13 +200,14 @@
     </div>
 
     <footer>
-      <iframe
+      <!-- <iframe
         src="footer.html"
         width="100%"
         height="auto"
         frameborder="0"
         style="height: 400px"
-      ></iframe>
+      ></iframe> -->
+      <?php include 'footer.php'; ?>
     </footer>
   </body>
 </html>

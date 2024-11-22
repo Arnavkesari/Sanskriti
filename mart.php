@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MarketPlace</title>
-    <link rel="stylesheet" href="styles1.css">
+    <link rel="stylesheet" href="mart.css?ver=1.3">
 </head>
 <body>
     <?php
     session_start();
-    include 'db_connection.php'; // Include the database connection file
-    ?>
 
-    <header>
-        <h1>Header</h1>
-    </header>
+    // if (isset($_SESSION['ID'])) {
+    //     echo "User is logged in. ID: " . $_SESSION['ID'] . ", Name: " . $_SESSION['user_name'] . ", User Type: " . $_SESSION['user_type'];
+    // } else {
+    //     echo "User is not logged in.";
+    // }
+// if (!isset($_SESSION['user_id'])) {
+//     header("Location: login.php"); // Redirect to login if not logged in
+//     exit();
+// }
+    include 'db_connection.php'; // Include the database connection file
+    include 'header.php'; // Include the header file
+    ?>
 
     <div class="banner-slider">
         <div class="slides-container" id="slidesContainer">
@@ -101,9 +108,9 @@
                         echo '<p class="description">' . htmlspecialchars($row["Description"]) . '</p>';
                         echo '<p class="price">$' . htmlspecialchars($row["Price"]) . '</p>';
                         echo '<div class="quantity-selector">';
-                        echo '<button class="decrement">−</button>';
+                        echo '<button class="decrement" onclick="updateQuantity(this, -1)">−</button>';
                         echo '<span class="quantity">1</span>';
-                        echo '<button class="increment">+</button>';
+                        echo '<button class="increment" onclick="updateQuantity(this, 1)">+</button>';
                         echo '</div>';
                         echo '<button class="add-to-cart">Add to Cart</button>';
                         echo '</div>';
@@ -133,9 +140,9 @@
     </section>
 
     <footer>
-        <p>Footer</p>
+        <?php include 'footer.php'; ?>
     </footer>
 
-    <script src="script1.js"></script>
+    <script src="mart.js?ver=1.4"></script>
 </body>
 </html>

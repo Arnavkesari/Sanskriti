@@ -1,48 +1,33 @@
-<?php
-session_start();
-include('db_connection.php');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+   
+<body>
+    <header>
+        <?php include 'header.php'; ?>
+    </header>
+    <main class="container" >
+        <h2>LOGIN</h2>
+        <form class="form-container" action="login_action.php" method="POST">
+            <label for="ID">User ID:</label>
+            <input type="text" id="ID" name="ID" required>
 
-// Retrieve input from POST
-$userID = $_POST['ID'];
-$userPassword = $_POST['password'];
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-// Check for User login
-$stmt = $conn->prepare("SELECT * FROM Users WHERE ID = ? AND Password = ?");
-$stmt->bind_param("ss", $userID, $userPassword);
-$stmt->execute();
-$res = $stmt->get_result();
-
-if ($result = $res->fetch_assoc()) {
-    // Store user information in session
-    $_SESSION['ID'] = $result['ID'];
-    $_SESSION['user_type'] = $result['UserType'];
-    $_SESSION['user_name'] = $result['Name']; // Assuming there’s a 'Name' field in Users table
-
-    // Redirect to retailer dashboard
-    header('Location: retailer_dashboard.php');
-    exit();
-}
-
-// If not a User, check for Admin login
-$stmt = $conn->prepare("SELECT * FROM Admin WHERE AdminID = ? AND Password = ?");
-$stmt->bind_param("ss", $userID, $userPassword);
-$stmt->execute();
-$res = $stmt->get_result();
-
-if ($result = $res->fetch_assoc()) {
-    // Store admin information in session
-    $_SESSION['ID'] = $result['AdminID'];
-    $_SESSION['user_type'] = 'Admin';
-    $_SESSION['user_name'] = $result['AdminName']; // Assuming there’s an 'AdminName' field in Admin table
-
-    // Redirect to admin dashboard
-    header('Location: Admin_dashboard.php'); // Consider using a different dashboard for admins
-    exit();
-}
-
-// If login fails, redirect to register page
-header('Location: register.html');
-exit();
-
-$conn->close();
-?>
+            <div id="save">
+                <button type="button" class="register-button" ><a href="register.html" > Register</a> </button>
+                <button type="submit" class="submit-button">Login Now</button>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <?php include 'footer.php'; ?>
+    </footer>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <?php
 // Database connection
 include 'db_connection.php'; // Include the database connection file
-include 'header.html'; // Include the header HTML file
+include 'header.php'; // Include the header HTML file
 
 // Check if state ID is provided in the URL
 if (isset($_GET['id'])) {
@@ -85,7 +85,7 @@ if (isset($_GET['id'])) {
 </div>
 
 <!-- Include Footer -->
-<?php include 'footer.html'; ?>
+<?php include 'footer.php'; ?>
 
 </body>
 </html>

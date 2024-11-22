@@ -42,7 +42,7 @@ mysqli_close($conn);
     <link rel="stylesheet" href="retailer_inventory.css">
 </head>
 <body>
-    <?php include 'header.html'; ?>
+    <?php include 'header.php'; ?>
 
     <div class="heading-container">
         <div class="heading">Inventory</div>
@@ -102,7 +102,7 @@ mysqli_close($conn);
     </section>
 
 
-    <?php include 'footer.html'; ?>
+    <?php include 'footer.php'; ?>
 
     <!-- Modal for delete confirmation -->
     <div class="modal" id="deleteModal">

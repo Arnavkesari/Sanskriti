@@ -41,7 +41,9 @@ mysqli_close($conn);
     <link rel="stylesheet" href="updateProduct.css">
 </head>
 <body>
-<header><iframe src="header.html" width="100%" height="100" frameborder="0"></iframe></header>
+<header>
+    <?php include 'header.php'; ?>
+</header>
 
     <main class="container">
         <h2>Update Product</h2>
@@ -83,5 +85,8 @@ mysqli_close($conn);
             </form>
         </div>
     </main>
+    <footer>
+        <?php include 'footer.php'; ?>
+    </footer>
 </body>
 </html>

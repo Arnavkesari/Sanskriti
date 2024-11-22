@@ -2,7 +2,7 @@
 // Database connection
 session_start();
 include 'db_connection.php'; // Include the database connection file
-include 'header.html';
+include 'header.php';
 
 // Check connection
 if ($conn->connect_error) {
@@ -130,9 +130,7 @@ function placeOrder() {
     });
 }
 </script>
-<?php
-include 'footer.html';
-?>
+<?php include 'footer.php'; ?>
 </body>
 </html>
 

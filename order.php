@@ -4,7 +4,7 @@
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
     }
-    include 'header.html';
+    include 'header.php';
     if (!isset($_SESSION['ID'])) {
         header('Location: login.html');
         exit();
@@ -91,9 +91,7 @@
       ?>
     </section>
   </main>
-  <?php
-    include 'footer.html';
-    ?>
+  <?php include 'footer.php'; ?>
 </body>
 </html>
 

@@ -1,60 +1,60 @@
-<?php
-// Database connection
-$host = 'localhost';
-$dbname = 'sanskriti';
-$username = 'root';
-$password = '';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="user_dashboard.css">
+</head>
+<body>
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
-}
+<header>
+    <?php include 'header.php'; ?>
+</header>
 
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $name = $_POST['name'];
-    $userId = $_POST['userId']; // this field is disabled, so it might not be sent; check accordingly
-    $password = $_POST['password'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $street = $_POST['street'];
-    $city = $_POST['city'];
-    $state = $_POST['state'];
-    $pincode = $_POST['pincode'];
+<main class="container">
+    <h2>User Dashboard</h2>
 
-    // Update query
-    $sql = "UPDATE Users SET 
-            Name = :name,
-            Password = :password,
-            Phone = :phone,
-            Email = :email,
-            Street = :street,
-            City = :city,
-            State = :state,
-            Pincode = :pincode
-            WHERE ID = :userId";
+        <form action="user_dashboard_action.php" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
 
-    $stmt = $pdo->prepare($sql);
+        <label for="userId">UserId:</label>
+        <input type="text" id="userId" name="userId" disabled >
+        <div id="note" >! (cannot update)</div>
 
-    // Bind parameters
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':password', $password);
-    $stmt->bindParam(':phone', $phone);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':street', $street);
-    $stmt->bindParam(':city', $city);
-    $stmt->bindParam(':state', $state);
-    $stmt->bindParam(':pincode', $pincode);
-    $stmt->bindParam(':userId', $userId);
+        <label for="password">Pass:</label>
+        <input type="password" id="password" name="password" placeholder="(xxxxx)">
 
-    // Execute the query
-    if ($stmt->execute()) {
-        echo "User information updated successfully!";
-    } else {
-        echo "Failed to update user information.";
-    }
-}
-?>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+
+        <h4 id="address">Address</h4>
+
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="street">
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city">
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state">
+
+        <label for="pincode">Pincode:</label>
+        <input type="text" id="pincode" name="pincode">
+
+        <div id="save">
+            <button type="submit" class="submit-button">Update</button>
+        </div>
+    </form>
+</main>
+
+<footer>
+    <?php include 'footer.php'; ?>
+</footer>
+
+</body>
+</html>
