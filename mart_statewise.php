@@ -11,8 +11,9 @@
     session_start();
     include 'db_connection.php'; // Include the database connection file
     include 'header.php'; // Include the header file
-    ?>
 
+    $stateid = $_GET['stateid'];
+    ?>
 
     <div class="region-select">
         <!-- Heading and Search Box -->
@@ -24,7 +25,7 @@
             <button class="scroll-button left" onclick="scrollLeft()">&#10094;</button>
             <!-- Regions Container -->
             <div class="regions-container" id="regionsContainer">
-                <?php
+            <?php
                     // Query to get regions (states)
                     $sql = "SELECT Name, ID FROM States";
                     $result = $conn->query($sql);
@@ -54,8 +55,9 @@
             <?php
                 // Fetch all products
                 $sql = "SELECT Products.ID, Products.Name, Products.Description, Products.Image, Products.Price, Products.Quantity, States.Name AS sname
-                        FROM Products
-                        JOIN States ON Products.StateID = States.ID";
+                        FROM Products, States
+                        WHERE Products.StateID = States.ID
+                        AND States.ID = $stateid";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
