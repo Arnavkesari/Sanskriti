@@ -157,3 +157,9 @@
     display: block;
     opacity: 1;
 }
+.products, .Retailer{
+    margin: 32px;
+}
+.product-grid, .retailer-grid{
+    padding: 0 12px;
+}

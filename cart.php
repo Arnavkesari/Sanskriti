@@ -26,7 +26,7 @@ $stmt->bind_param("s", $customer_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-$sql1 = "SELECT Street, City, State, Pincode FROM users WHERE ID = ?";
+$sql1 = "SELECT Street, City, State, Pincode FROM Users WHERE ID = ?";
 $stmt1 = $conn->prepare($sql1);
 $stmt1->bind_param("s", $customer_id);
 $stmt1->execute();

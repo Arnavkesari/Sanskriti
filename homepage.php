@@ -21,67 +21,56 @@
       </video>
       <div class="overlay">
         <div class="slogan-slider">
-          <span id="slogan-text">Celebrating India's Rich Culture</span>
+          <span id="slogan-text"></span> <!-- Text will be injected by JavaScript -->
         </div>
-        <a href="#cultural-sites" id="view-more" class="view-more">View More</a>
+        <a href="#section" id="read-more" class="view-more">Explore More</a>
       </div>
       <script>
         document.addEventListener("DOMContentLoaded", function () {
-          // Array of slogans
-          const slogans = [
-            "Celebrating India's Rich Culture",
-            "Diversity in Every Corner",
-            "Experience Timeless Traditions",
-            "India: Where Culture Thrives",
-            "Discover the Heart of Heritage",
-          ];
+        const slogans = [
+          "Celebrating India's Rich Culture",
+          "Diversity in Every Corner",
+          "Experience Timeless Traditions",
+          "India: Where Culture Thrives",
+          "Discover the Heart of Heritage",
+        ];
 
-          let sloganIndex = 0;
-          let charIndex = 0;
-          const typingSpeed = 100; // Speed of typing (milliseconds)
-          const pauseBetweenSlogans = 2000; // Pause between slogans (milliseconds)
-          const sloganText = document.getElementById("slogan-text");
+        let sloganIndex = 0;
+        let charIndex = 0;
+        const typingSpeed = 100;
+        const pauseBetweenSlogans = 2000;
+        const sloganText = document.getElementById("slogan-text");
 
-          function typeSlogan() {
-            // Get the current slogan
-            const currentSlogan = slogans[sloganIndex];
+        function typeSlogan() {
+          const currentSlogan = slogans[sloganIndex];
 
-            // Display the next character
-            if (charIndex < currentSlogan.length) {
-              sloganText.textContent += currentSlogan.charAt(charIndex);
-              charIndex++;
-              setTimeout(typeSlogan, typingSpeed);
-            } else {
-              // Pause after finishing the slogan, then proceed to the next one
-              setTimeout(() => {
-                // Reset text and move to the next slogan
-                sloganText.textContent = "";
-                charIndex = 0;
-                sloganIndex = (sloganIndex + 1) % slogans.length;
-                typeSlogan();
-              }, pauseBetweenSlogans);
-            }
+          if (charIndex < currentSlogan.length) {
+            sloganText.textContent += currentSlogan.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeSlogan, typingSpeed);
+          } else {
+            // Pause after completing the slogan, then reset for the next one
+            setTimeout(() => {
+              sloganText.textContent = ""; // Clear the text
+              charIndex = 0; // Reset character index
+              sloganIndex = (sloganIndex + 1) % slogans.length; // Move to the next slogan
+              typeSlogan(); // Restart the typing effect
+            }, pauseBetweenSlogans);
           }
+        }
 
-          // Start the typewriter effect when the page loads
-          typeSlogan();
-          document
-            .getElementById("view-more")
-            .addEventListener("click", function (event) {
-              event.preventDefault(); // Prevent default anchor behavior
+        typeSlogan();
+      });
 
-              const target = document.querySelector("#cultural-sites");
-              const headerOffset = 100; // Adjust offset based on header height
-              const elementPosition =
-                target.getBoundingClientRect().top + window.pageYOffset;
-              const offsetPosition = elementPosition - headerOffset;
 
-              window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth",
-              });
-            });
+      document.getElementById("read-more").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default anchor behavior
+        window.scrollTo({
+          top: window.innerHeight, // Scroll down to 100vh
+          behavior: "smooth", // Enable smooth scrolling
         });
+      });
+
       </script>
     </div>
 
@@ -143,15 +132,15 @@
         <div class="sites-grid">
           <!-- Adding uploaded images here -->
           <div class="site-item">
-            <img src="./assets/cultural_sites/Uttar Pradesh/Taj_Mahal.jpg" alt="Taj Mahal" />
+            <a href="state.php?id=ST101"><img src="./assets/cultural_sites/Uttar Pradesh/Taj_Mahal.jpg" alt="Taj Mahal" /></a>
             <p class="hover-text" style="display: none;">Taj Mahal</p>
           </div>
           <div class="site-item">
-            <img src="./assets/cultural_sites/Karnataka/somanathapura_vishnu_temple.jpg" alt="" />
+          <a href="state.php?id=ST106"><img src="./assets/cultural_sites/Karnataka/somanathapura_vishnu_temple.jpg" alt="" /></a>
             <p class="hover-text" style="display: none;">Somanathapura Vishnu Temple</p>
           </div>
           <div class="site-item">
-            <img src="./assets/cultural_sites/Gujarat/The-Statue-of-Unity.jpg" alt="" />
+          <a href="state.php?id=ST104"><img src="./assets/cultural_sites/Gujarat/The-Statue-of-Unity.jpg" alt="" /></a>
             <p class="hover-text" style="display: none;">The Statue of Unity</p>
           </div>
         </div>
@@ -161,19 +150,19 @@
         <h3>Local Artist Products</h3>
         <div class="products-grid">
           <div class="product-item">
-            <img src="./assets/products/Uttar Pradesh/Silh_Handloom_Banarasi_Saree.jpg" alt="" />
+            <a href="mart.php"><img src="./assets/products/Uttar Pradesh/Silh_Handloom_Banarasi_Saree.jpg" alt="" /></a>
             <p class="hover-text" style="display: none;">Handloom Banarasi Saree</p>
           </div>
           <div class="product-item">
-            <img src="./assets/products/Karnataka/Channapatna_Toys.jpg" alt="" />
+            <a href="mart.php"><img src="./assets/products/Karnataka/Channapatna_Toys.jpg" alt="" /></a>
             <p class="hover-text" style="display: none;">Channapatna Toys</p>
           </div>
           <div class="product-item">
-            <img src="./assets/products/Assam/ThangkaPaintings.jpg" alt="" />
+            <a href="mart.php"><img src="./assets/products/Assam/ThangkaPaintings.jpg" alt="" /></a>
             <p class="hover-text" style="display: none;">Thangka Paintings</p>
           </div>
           <div class="product-item">
-            <img src="./assets/products/Karnataka/Rosewood_decorative.jpg" alt="" />
+            <a href="mart.php"><img src="./assets/products/Karnataka/Rosewood_decorative.jpg" alt="" /></a>
             <p class="hover-text" style="display: none;">Rosewood Decorative</p>
           </div>
         </div>
@@ -202,13 +191,6 @@
     </div>
 
     <footer>
-      <!-- <iframe
-        src="footer.html"
-        width="100%"
-        height="auto"
-        frameborder="0"
-        style="height: 400px"
-      ></iframe> -->
       <?php include 'footer.php'; ?>
     </footer>
   </body>

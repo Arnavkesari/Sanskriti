@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="Admin_dashboard.css">
+    <link rel="stylesheet" href="Admin_dashboard.css?ver=1.2">
 </head>
 <body>
     <?php
@@ -89,12 +89,12 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
-        <?php
+                <?php
         if($pendingCount1==0)
         echo "<p>No pending products at the moment.</p>";
-
-        ?> 
+    
+    ?> 
+    </div>
     </section>
     
     <?php  $conn->close();include 'footer.php'; ?>

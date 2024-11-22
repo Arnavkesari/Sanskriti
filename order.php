@@ -33,7 +33,7 @@
       
 
       // Query to get orders for the specific user
-      $orderQuery = "SELECT * FROM `order` WHERE CustID = '$userID'";
+      $orderQuery = "SELECT * FROM `Order` WHERE CustID = '$userID'";
       $orderResult = $conn->query($orderQuery);
 
       if ($orderResult->num_rows > 0) {
