@@ -43,7 +43,20 @@ try {
     if (!$stmt->execute()) {
         throw new Exception("Failed to execute Products_in_Order insertion: " . $stmt->error);
     }
-
+    
+    // Subtract quantities from Products table
+    $sql = "UPDATE Products p
+            INNER JOIN Cart c ON p.ID = c.ProductID
+            SET p.Quantity = p.Quantity - c.Quantity
+            WHERE c.CustID = ?";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        throw new Exception("Failed to prepare statement for quantity update: " . $conn->error);
+    }
+    $stmt->bind_param("s", $customer_id);
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to update product quantities: " . $stmt->error);
+    }
     // Clear the Cart for this user
     $sql = "DELETE FROM Cart WHERE CustID = ?";
     $stmt = $conn->prepare($sql);
@@ -54,7 +67,7 @@ try {
     if (!$stmt->execute()) {
         throw new Exception("Failed to execute Cart clearing: " . $stmt->error);
     }
-
+    
     // Commit transaction
     $conn->commit();
     echo json_encode(['success' => true]);

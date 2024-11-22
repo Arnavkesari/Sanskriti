@@ -74,6 +74,7 @@
                       echo "<div class='item-details'>";
                       echo "<h3 class='item-name'>{$productName}</h3>";
                       echo "<p class='item-quantity'><b>Quantity</b>: {$productQuantity}</p>";
+                      $productPrice=$productPrice*$productQuantity;
                       echo "<p class='item-price'><b>Price</b>: $" . number_format($productPrice, 2) . "</p>";
                       echo "</div>";
                       echo "</div>";

@@ -1,6 +1,5 @@
 <?php
-// Database connection
-session_start();
+
 include 'db_connection.php'; // Include the database connection file
 include 'header.php';
 
@@ -27,6 +26,17 @@ $stmt->bind_param("s", $customer_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
+$sql1 = "SELECT Street, City, State, Pincode FROM users WHERE ID = ?";
+$stmt1 = $conn->prepare($sql1);
+$stmt1->bind_param("s", $customer_id);
+$stmt1->execute();
+$result1 = $stmt1->get_result();
+
+$default_address = "";
+if ($row = $result1->fetch_assoc()) {
+    $default_address = $row['Street'] . ", " . $row['City'] . ", " . $row['State'] . ", " . $row['Pincode'];
+}
+
 $products = [];
 while ($row = $result->fetch_assoc()) {
     $products[] = $row;
@@ -47,7 +57,7 @@ foreach ($products as $product) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="carts.css">
+    <link rel="stylesheet" href="cart.css">
 </head>
 <body>
 
@@ -68,6 +78,7 @@ foreach ($products as $product) {
                         <button class="btn btn-sm btn-outline-secondary ml-2" onclick="updateQuantity('<?php echo $product['ProductID']; ?>', 'decrement')">-</button>
                     </div>
                 </div>
+                <?php $product['Price']=$product['Price']*$product['Quantity'];?>
                 <span class="price">$<?php echo htmlspecialchars(number_format($product['Price'], 2)); ?></span>
             </div>
             <?php endforeach; ?>
@@ -78,8 +89,9 @@ foreach ($products as $product) {
             </div>
 
             <div class="form-group">
-                <input type="text" id="address" class="form-control" placeholder="Enter Address">
+                 <input type="text" id="address" class="form-control" placeholder="Enter Address" value="<?php echo htmlspecialchars($default_address); ?>">
             </div>
+
             <button class="btn btn-primary btn-save" onclick="placeOrder()">BUY NOW</button>
         </div>
     </div>
