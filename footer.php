@@ -11,15 +11,16 @@
             padding: 0;
         }
 
-        /* Footer Styles */
+        /* Flexbox layout for footer positioning */
         body {
             display: flex;
             flex-direction: column;
-            width: 100%;
+            min-height: 100%;
         }
 
         .content {
-            flex: 1; /* This makes the content take up remaining space */
+            flex-grow: 1; /* Let the content take available space */
+            width: 100%;
         }
 
         .footer {
@@ -32,7 +33,6 @@
             flex-wrap: wrap;
             text-align: left;
             font-family: Arial, sans-serif;
-            
         }
 
         .footer-section {

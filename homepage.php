@@ -102,37 +102,37 @@
           <area
             shape="circle"
             coords="84,289,20"
-            href="state.php?id=ST113"
+            href="state.php?id=ST104"
             alt="Gujarat"
           />
           <area
             shape="circle"
             coords="173,295,20"
-            href="state.php?id=ST119"
+            href="state.php?id=ST102"
             alt="MP"
           />
           <area
             shape="circle"
             coords="238,221,20"
-            href="state.php?id=ST126"
+            href="state.php?id=ST101"
             alt="UP"
           />
           <area
             shape="circle"
             coords="129,81,20"
-            href="state.php?id=ST101"
+            href="state.php?id=ST103"
             alt="Jammu"
           />
           <area
             shape="circle"
             coords="146,439,20"
-            href="state.php?id=ST117"
+            href="state.php?id=ST106"
             alt="Karnataka"
           />
           <area
             shape="circle"
             coords="437,226,20"
-            href="state.php?id=ST103"
+            href="state.php?id=ST105"
             alt="Assam"
           />
           <!-- Add more areas as needed -->
