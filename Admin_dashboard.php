@@ -10,7 +10,7 @@
     <?php
     session_start();
     include 'db_connection.php'; // Include the database connection file
-    include 'header.html';
+    include 'header.php';
     if (!isset($_SESSION['ID'])) {
         header('Location: login.html');
         exit();
@@ -124,8 +124,6 @@
     }
     $conn->close();
     ?>
-    <?php
-    include 'footer.html';
-    ?>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

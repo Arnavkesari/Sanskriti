@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +24,6 @@
     }
 
     .container1 {
-      /* max-width: 1200px; */
       margin: 0 auto;
       padding: 0 1.5rem;
       display: flex;
@@ -32,14 +35,12 @@
     .logo {
       display: flex;
       align-items: center;
-
     }
 
     .logo img {
       height: 3.2rem;
       width: 6rem;
       margin-right: 0.75rem;
-
     }
 
     .logo a {
@@ -101,20 +102,28 @@
       background-color: #0056b3;
       transform: scale(1.05);
     }
-
   </style>
 </head>
 <body>
   <header>
     <div class="container1">
       <div class="logo">
-        <img src="sanskriti_logo.jpeg" alt="Logo" >
+        <img src="sanskriti_logo.jpeg" alt="Logo">
       </div>
       <nav>
-        <a href="#">Home</a>
-        <a href="#">Cultural Sites</a>
-        <a href="#">Login</a>
-        <a href="#" class="register-btn">Register</a>
+        <a href="./homepage.php">Home</a>
+        <a href="./mart.php">Mart</a>
+
+        <?php if (isset($_SESSION['ID'])): ?>
+          <!-- Links for logged-in users -->
+          <a href="./cart.php">Cart</a>
+          <a href="./user_dashboard.php">Profile</a>
+          <a href="logout.php">Logout</a>
+        <?php else: ?>
+          <!-- Links for logged-out users -->
+          <a href="./login.php">Login</a>
+          <a href="./register.php" class="register-btn">Register</a>
+        <?php endif; ?>
       </nav>
     </div>
   </header>
