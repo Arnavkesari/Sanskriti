@@ -83,16 +83,14 @@
         <h2>Products</h2>
         <div class="product-grid">
             <?php
-                // Default query to fetch all products
-                // $sql = "SELECT ID, Name, Description, Image, Price, Quantity FROM Products";
-
-                $sql="SELECT Products.ID, Products.Name, Products.Description, Products.Image, Products.Price, Products.Quantity ,States.Name AS sname
-                            FROM Products 
-                            JOIN States ON Products.StateID = States.ID";
+                // Fetch all products
+                $sql = "SELECT Products.ID, Products.Name, Products.Description, Products.Image, Products.Price, Products.Quantity, States.Name AS sname
+                        FROM Products
+                        JOIN States ON Products.StateID = States.ID";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
+                    while ($row = $result->fetch_assoc()) {
                         echo '<div class="product-card">';
                         echo '<img src="' . htmlspecialchars($row["Image"]) . '" alt="Product Image">';
                         echo '<h3>' . htmlspecialchars($row["Name"]) . '</h3>';

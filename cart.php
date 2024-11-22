@@ -17,7 +17,7 @@ if (!isset($_SESSION['ID'])) {
 // Fetch Cart and Product data for a specific customer
 $customer_id = $_SESSION['ID'];
 
-$sql = "SELECT p.ID AS ProductID, p.Image, p.Description, p.Price, c.Quantity 
+$sql = "SELECT p.ID AS ProductID, p.Image, p.Description, p.Price, c.Quantity , p.Name as pname
         FROM Cart c 
         JOIN Products p ON c.ProductID = p.ID 
         WHERE c.CustID = ?";
@@ -71,11 +71,11 @@ foreach ($products as $product) {
             <div class="product-item d-flex align-items-center mb-3">
                 <img src="<?php echo htmlspecialchars($product['Image']); ?>" alt="Product Image" class="product-img mr-3">
                 <div class="product-info mr-auto">
-                    <p class="description mb-1"><?php echo htmlspecialchars($product['Description']); ?></p>
+                    <p class="description mb-1"><?php echo htmlspecialchars($product['pname']); ?></p>
                     <div class="quantity-control d-flex align-items-center">
-                        <button class="btn btn-sm btn-outline-secondary mr-2" onclick="updateQuantity('<?php echo $product['ProductID']; ?>', 'increment')">+</button>
-                        <span class="quantity"><?php echo htmlspecialchars($product['Quantity']); ?></span>
                         <button class="btn btn-sm btn-outline-secondary ml-2" onclick="updateQuantity('<?php echo $product['ProductID']; ?>', 'decrement')">-</button>
+                        <span class="quantity"><?php echo htmlspecialchars($product['Quantity']); ?></span>
+                        <button class="btn btn-sm btn-outline-secondary mr-2" onclick="updateQuantity('<?php echo $product['ProductID']; ?>', 'increment')">+</button>
                     </div>
                 </div>
                 <?php $product['Price']=$product['Price']*$product['Quantity'];?>

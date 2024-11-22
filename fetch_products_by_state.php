@@ -1,6 +1,17 @@
 <?php
 include 'db_connection.php'; // Database connection
-
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="mart.css">
+</head>
+<body>
+    
+<?php
 if (isset($_GET['state'])) {
     $state = $_GET['state'];
 
@@ -36,3 +47,6 @@ if (isset($_GET['state'])) {
 }
 $conn->close();
 ?>
+<script src="mart.js?ver=1.4"></script>
+</body>
+</html>
