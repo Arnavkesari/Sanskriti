@@ -14,6 +14,7 @@ session_start();
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+     
     }
 
     header {
@@ -21,6 +22,7 @@ session_start();
       color: #fff;
       padding: 1rem 0;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 100;
     }
 
     .container1 {
@@ -117,7 +119,15 @@ session_start();
         <?php if (isset($_SESSION['ID'])): ?>
           <!-- Links for logged-in users -->
           <a href="./cart.php">Cart</a>
-          <a href="./user_dashboard.php">Profile</a>
+
+          <?php if ($_SESSION['user_type'] == 'Retailer'): ?>
+            <a href="./retailer_dashboard.php">Profile</a>
+          <?php elseif($_SESSION['user_type'] == 'Customer'): ?>
+            <a href="./user_dashboard.php">Profile</a>
+          <?php else: ?>
+            <a href="./Admin_dashboard.php">Profile</a>
+          <?php endif; ?>
+
           <a href="logout.php">Logout</a>
         <?php else: ?>
           <!-- Links for logged-out users -->

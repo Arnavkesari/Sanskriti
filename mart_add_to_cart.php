@@ -4,11 +4,9 @@ include 'db_connection.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['ID'])) {
-    echo $_SESSION['ID'];
     echo "Please log in to add items to your cart.";
     exit();
 }
-// echo $_SESSION['ID'];
 
 
 // Get POST data

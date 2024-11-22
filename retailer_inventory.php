@@ -46,7 +46,7 @@ mysqli_close($conn);
 
     <div class="heading-container">
         <div class="heading">Inventory</div>
-        <a href="addProduct.html">
+        <a href="addProduct.php">
             <button class="add-new-button">Add New Product</button>
         </a>
     </div>
